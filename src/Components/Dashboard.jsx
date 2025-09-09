@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNewsStore } from "../UseNewsContext/news";
 
-
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import AddNews from "./AddNews";
@@ -15,7 +15,7 @@ const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
 const Dashboard = () => {
 
 
-
+ const navigate = useNavigate(); 
 
 
   const { addNews, removeNews, newses } = useNewsStore();
@@ -25,6 +25,17 @@ const Dashboard = () => {
   useEffect(() => {
 
   const fetchData = async () => {
+
+
+
+    const loginStatus = localStorage.getItem("isLoggedIn");
+
+    if(loginStatus!=='true')
+    {
+      navigate("/login")
+    }
+
+
 
     try {
 

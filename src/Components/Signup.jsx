@@ -37,9 +37,9 @@ useEffect(() => {
     }
 
 
-  }, [navigate]);
+  },[]);
 
-  
+
 
 const onSubmit = (data) => {
 
@@ -56,6 +56,10 @@ const onSubmit = (data) => {
 
 
   localStorage.setItem("users", JSON.stringify(existingUsers));
+  alert("User add succesfully")
+  navigate("/login")
+
+  
 
   reset();
 
@@ -78,6 +82,10 @@ const onSubmit = (data) => {
 
 
   return (
+<>
+     <div class="flex items-center justify-center mt-15  mb-10">
+        <h1 class="text-5xl font-bold text-blue-600">Signup Form</h1>
+      </div>
 
 
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto mt-10 p-5">
@@ -140,7 +148,7 @@ const onSubmit = (data) => {
     </form>
 
 
-
+</>
   );
 }
 

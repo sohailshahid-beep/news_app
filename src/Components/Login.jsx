@@ -75,14 +75,22 @@ const Login = () => {
     }
   };
 
-  
+
 
   return (
+
+    <>
+
+
+     <div class="flex items-center justify-center mt-15 mb-10">
+        <h1 class="text-5xl font-bold text-blue-600">Login Form</h1>
+      </div>
 
 
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto mt-10 p-5">
       <div className="mb-5">
         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your Email</label>
+        <br></br>
 
 
         <input 
@@ -97,9 +105,10 @@ const Login = () => {
 
 
       </div>
+        <br></br>
 
       <div className="mb-5">
-        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Your Password</label>
+        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Your Password</label>  <br></br>
         <input 
           type="password"
           id="password"
@@ -111,18 +120,20 @@ const Login = () => {
       </div>
 
 
-
+  <br></br>
       <button 
         type="submit" 
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
       >
         Login
       </button>
+        <br></br>
+          <br></br>
 
       <p className="mt-4">Not Having Account? <Link to="/signup" className="text-blue-500">Signup</Link></p>
     </form>
 
-
+</>
   );
 }
 
