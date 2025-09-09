@@ -19,21 +19,8 @@ export const useNewsStore = create((set) => ({
 
 
     set((state) => ({
+      
       newses: state.newses.filter((u) => u.id !== id),
-
-    })),
-
-
-
-  updateNews: (updatedNews) =>
-
-    set((state) => ({
-        
-      newses: state.newses.map((u) =>
-        u.id === updatedNews.id ? updatedNews : u
-
-
-      ),
 
     })),
 
