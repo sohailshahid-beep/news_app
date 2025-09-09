@@ -14,20 +14,23 @@ const schema = yup.object().shape({
   publishedAt: yup.date().required("Publish date is required"),
 });
 
+
 const AddNews = () => {
 
   const { addNews, newses } = useNewsStore();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
+
+  const { register, handleSubmit, reset, formState: { errors }} =  useForm({
+
     resolver: yupResolver(schema),
+
   });
 
+
+
+
   const onSubmit = (data) => {
+
     const newId = newses.length > 0 ? newses[newses.length - 1].id + 1 : 0;
 
     const newsData = {
@@ -56,6 +59,8 @@ const AddNews = () => {
 
       <form className="max-w-sm mx-auto" onSubmit={handleSubmit(onSubmit)}>
     
+
+
         <div className="mb-5">
           <label
             htmlFor="author"
@@ -65,12 +70,18 @@ const AddNews = () => {
           </label>
           <input
             id="author"
+
             {...register("author")}
+            
             placeholder="Author name"
             className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           />
           <p className="text-red-500 text-sm mt-1">{errors.author?.message}</p>
         </div>
+
+
+
+
 
         <div className="mb-5">
           <label
@@ -79,6 +90,8 @@ const AddNews = () => {
           >
             Title
           </label>
+
+
           <input
             id="title"
             {...register("title")}
@@ -87,6 +100,9 @@ const AddNews = () => {
           />
           <p className="text-red-500 text-sm mt-1">{errors.title?.message}</p>
         </div>
+
+
+
 
         <div className="mb-5">
           <label

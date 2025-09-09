@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNewsStore } from "../UseNewsContext/news";
-import { Link } from "react-router-dom";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -11,35 +11,40 @@ const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
 
 
 
+
 const Dashboard = () => {
 
 
 
-  const [mydata, setmydata] = useState([]);
 
 
-  const { addNews, updateNews, removeNews, newses } = useNewsStore();
+  const { addNews, removeNews, newses } = useNewsStore();
 
 
 
   useEffect(() => {
 
-
   const fetchData = async () => {
 
-
     try {
+
+
       const response = await fetch(url);
+
       if (!response.ok) {
         console.log("Network response was not ok");
         return;
       }
 
-      const data = await response.json();
-      setmydata(data.articles);
 
- 
+
+      const data = await response.json();
+
+      console.log("data is ",data)
+
+
       data.articles.forEach((article, index) => {
+
 
         addNews({
           id: index,
@@ -51,8 +56,9 @@ const Dashboard = () => {
           url: article.url || "#",
           urlToImage: article.urlToImage || "",
         });
-      });
 
+
+      });
 
     } catch (error) {
       console.log("Fetch error:", error);
@@ -60,7 +66,6 @@ const Dashboard = () => {
   };
 
   fetchData();
-
 }, []);
 
 
@@ -92,10 +97,11 @@ const Dashboard = () => {
     <div className="grid grid-cols-4 gap-6 mt-25">
 
 
-      {newses.map((a, index) => (
+      {newses.map((a) => (
 
         <div
-          key={index}
+        
+          key={a.id}
           className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
         >
 
