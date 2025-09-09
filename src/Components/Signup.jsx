@@ -39,19 +39,37 @@ useEffect(() => {
 
   }, [navigate]);
 
+  
 
 const onSubmit = (data) => {
 
 
+
   const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
+  const user = existingUsers.find((u)=>u.email===data.email)
 
-  existingUsers.push(data);
+
+  if(!user)
+  {
+    existingUsers.push(data);
 
 
   localStorage.setItem("users", JSON.stringify(existingUsers));
 
   reset();
+
+  }
+
+  else
+
+    {
+
+      alert("User Already Exist")
+    }
+
+
+  
 };
 
 

@@ -26,6 +26,7 @@ const Login = () => {
   });
 
 
+
   useEffect(() => {
 
 
@@ -34,8 +35,7 @@ const Login = () => {
       navigate("/dashboard");
     }
 
-
-  }, [navigate]);
+  },[]);
 
 
 
@@ -44,8 +44,6 @@ const Login = () => {
 
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
     const user = existingUsers.find(user => user.email === data.email);
-
-
 
     if (user) {
 
@@ -76,6 +74,8 @@ const Login = () => {
       reset();
     }
   };
+
+  
 
   return (
 
