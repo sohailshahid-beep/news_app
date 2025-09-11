@@ -3,9 +3,7 @@ import { useNewsStore } from "../UseNewsContext/news";
 import axios from "axios";
 import AddNews from "./AddNews";
 import { Link } from "react-router-dom";
-import NewsCard from "./List_News";
-
-import Footer from "./Footer"
+import NewsCard from "./NewsCard";
 
 const apiKey = "84e09464ce6c4b0ebd4a2c295bbf902b";
 const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
@@ -23,6 +21,7 @@ const Dashboard = () => {
         console.log(data)
 
         const mappedData = data.articles.map(article => ({
+          
           id: article.url,
           author: article.author || "Untitled",
           content: article.content || "Untitled",
@@ -76,7 +75,7 @@ const Dashboard = () => {
           </div>
         ))}
       </div>
-        <Footer/>
+    
     </>
   );
 };

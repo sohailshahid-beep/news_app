@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link, useNavigate } from 'react-router-dom';
-import Footer from './Footer';
-
+import { Link, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+import InputField from "./Commen/InputField";
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
-  email: yup.string().email("Email must be valid").required("Email is required"),
+  email: yup
+    .string()
+    .email("Email must be valid")
+    .required("Email is required"),
   password: yup
     .string()
     .required("Password is required")
@@ -17,21 +20,14 @@ const schema = yup.object().shape({
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
-
-  useEffect(() => {
-
-
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (isLoggedIn === "true") {
-      navigate("/dashboard");
-    }
-  }, [navigate]);
-
-
-
 
   const onSubmit = (data) => {
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
@@ -48,69 +44,42 @@ const Signup = () => {
     }
   };
 
-
-
-
   return (
-
     <>
-   
       <div className="flex items-center justify-center mt-12 mb-6">
-        <h1 className="text-4xl md:text-5xl font-bold text-blue-600 mb-10">Signup Form</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-blue-600 mb-10">
+          Signup Form
+        </h1>
       </div>
 
       <form
-
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-md mx-auto p-6 bg-white mb-20 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-2xl shadow-lg transition-transform transform hover:scale-[1.01]"
       >
+        <InputField
+          label="Name"
+          id="name"
+          register={register}
+          error={errors.name}
+          placeholder="your name"
+        />
 
-  
-        <div className="mb-5">
-          <label htmlFor="name" className="block mb-5 text-sm font-medium text-gray-900 dark:text-white">
-            Your Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            {...register("name")}
-            className="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg w-full p-2.5 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Type your name here"
-          />
-          {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
-        </div>
+        <InputField
+          label="Email"
+          id="email"
+          register={register}
+          error={errors.email}
+          placeholder="name@domain.com"
+        />
 
-    
-        <div className="mb-5">
-          <label htmlFor="email" className="block mb-5 text-sm font-medium text-gray-900 dark:text-white">
-            Your Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            {...register("email")}
-            className="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg w-full p-2.5 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="name@domain.com"
-          />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-        </div>
+        <InputField
+          label="Password"
+          id="password"
+          register={register}
+          error={errors.password}
+          placeholder="xxxx"
+        />
 
-     
-        <div className="mb-5">
-          <label htmlFor="password" className="block mb-5 text-sm font-medium text-gray-900 dark:text-white">
-            Your Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            {...register("password")}
-            className="bg-gray-50 dark:bg-gray-700 mb-5 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg w-full p-2.5 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="xxxx"
-          />
-          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
-        </div>
-
-     
         <button
           type="submit"
           className="w-full mb-5 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-200"
@@ -118,7 +87,6 @@ const Signup = () => {
           Signup
         </button>
 
-     
         <p className="mt-6 text-center text-gray-700 dark:text-gray-300">
           Already have an account?{" "}
           <Link to="/login" className="text-blue-500 hover:underline">
@@ -128,10 +96,7 @@ const Signup = () => {
       </form>
       <Footer></Footer>
     </>
-
   );
-
-  
 };
 
 export default Signup;
